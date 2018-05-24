@@ -4,33 +4,69 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.florent.f1game.F1Game;
 
 public class MainMenuScreen implements Screen {
 	
 	private F1Game game;
 	
-	Texture mainMenu;
-	Texture mainMenuNewGame;
-	Texture mainMenuContinue ;
-	Texture mainMenuControl;
 	
-	int maxNewGameY;
-	int maxContinueY;
+	SpriteBatch batch;
+	BitmapFont font ;	
 	
+	private static GlyphLayout glyphLayout = new GlyphLayout();
+	
+	private String tNewGame;
+	private String tContinue;
+	private String tControl;
+	
+	private int axeX;
+	private int continuePositionY;
+	private int spacing;
+	private float scaleFont;
+	
+	private Texture metalPlate ;
 	
 	public MainMenuScreen(F1Game game) {
 		
 		this.game = game;
-		mainMenu = new Texture("F1 Project MainMenu.png");
-		mainMenuNewGame = new Texture("F1 Project MainMenu New Game select.png");
-		mainMenuContinue = new Texture("F1 Project MainMenu Continue select.png");
-		mainMenuControl  = new Texture("F1 Project MainMenu Control select.png");
 		
-		maxNewGameY = 350;
-		maxContinueY = 450;
+		
+		/*****************************************************************************************************/
+
+
+		font = new BitmapFont(Gdx.files.internal("font/ScifiMovies.fnt"));
+		
+		
+		tNewGame = "NEW GAME";
+		tContinue = "CONTINUE";
+		tControl = "CONTROL";
+		
+		axeX = 1000;
+		continuePositionY = 300;
+		spacing = 100;
+		scaleFont = 0.7f;
+		
+		
+		metalPlate = new Texture ("MetalPlate.jpg");
+		
+		font.getData().setScale(scaleFont);  // redimension police
+		
+
+		
+		
+		/*****************************************************************************************************/
 		
 	}
+	
+	
+	
 
 	@Override
 	public void show() {
@@ -41,12 +77,36 @@ public class MainMenuScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		
-		Gdx.gl.glClearColor(1,1,1,1);   //color
+		//Gdx.gl.glClearColor(0,0,0,0);   //color
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);  // clear the screen
 		
 		game.batch.begin();
 		
 		
+		/*****************************************************************************************************/
+		
+		glyphLayout.setText(font, tNewGame);
+		
+	
+		font.draw(game.batch, glyphLayout, 
+				axeX - glyphLayout.width /2 ,
+				Gdx.graphics.getHeight() - continuePositionY);
+		
+		
+		glyphLayout.setText(font, tContinue);
+		font.draw(game.batch, tContinue, 
+				axeX - glyphLayout.width /2 ,
+				Gdx.graphics.getHeight() - continuePositionY-spacing);
+		
+		
+		glyphLayout.setText(font, tControl);
+		font.draw(game.batch, tControl, 
+				axeX - glyphLayout.width /2 ,
+				Gdx.graphics.getHeight() - continuePositionY - 2 * spacing);
+		
+		/*****************************************************************************************************/
+		
+		/*
 		if(Gdx.input.getX()<= 480 || Gdx.input.getX() >= 800 || Gdx.input.getY() <= 260 || Gdx.input.getY() >= 530  ) {
 			game.batch.draw(mainMenu, 0, 0);
 		}
@@ -60,12 +120,12 @@ public class MainMenuScreen implements Screen {
 			game.batch.draw(mainMenuControl, 0, 0);
 		}
 		
+		*/
 		
-		System.out.println(Gdx.input.getY());
+		//System.out.println(Gdx.input.getY());
 		
 		game.batch.end();
-		
-		// TODO Auto-generated method stub
+
 		
 	}
 
