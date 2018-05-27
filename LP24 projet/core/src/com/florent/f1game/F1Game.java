@@ -3,7 +3,7 @@ package com.florent.f1game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.florent.f1game.screen.MainMenuScreen;
-import com.florent.f1game.screen.TestScreen;
+
 
 public class F1Game extends Game {
 	
@@ -14,13 +14,13 @@ public class F1Game extends Game {
 	public SpriteBatch batch;
 
 	
-	TestScreen mainMenuScreen;
+	MainMenuScreen mainMenuScreen;
 	
 	@Override
 	public void create () {
+		
 		batch = new SpriteBatch();
-
-		this.setScreen(new MainMenuScreen(this));
+		this.setScreen(new MainMenuScreen());
 	}
 	
 	@Override
