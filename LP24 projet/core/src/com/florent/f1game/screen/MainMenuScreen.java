@@ -15,20 +15,36 @@ import com.florent.f1game.F1Game;
 
 public class MainMenuScreen implements Screen{
 
+	F1Game game;
 	
 	private Stage stage;
 	private Skin skin;
 	private TextButton buttonPlay,buttonContinue, buttonControl, buttonExit;
 	private BitmapFont font;
 	
-	private float buttonScale = 0.3f ;
-	private float fontScale = 1.4f;
-	private int buttonAxeX = 2* F1Game.V_WIDTH /3;
-	private int buttonAxeY = 2*F1Game.V_HEIGHT / 3;
-	private float buttonSpacing = 10;
+	private float buttonScale;
+	private float fontScale;
+	private int buttonAxeX;
+	private int buttonAxeY;
+	private float buttonSpacing;
 	
-	private String textureButtonUp = "boutons_rect_up.png";
-	private String textureButtondown = "boutons_rect_down.png";
+	private String textureButtonUp;
+	private String textureButtondown;
+	
+	
+	public MainMenuScreen(F1Game game) {
+		
+		this.game = game;
+		
+		buttonScale = 0.3f ;
+		fontScale = 1.4f;
+		buttonAxeX = 2* F1Game.V_WIDTH /3;
+		buttonAxeY = 2*F1Game.V_HEIGHT / 3;
+		buttonSpacing = 10;
+		
+		textureButtonUp = "boutons_rect_up.png";
+		textureButtondown = "boutons_rect_down.png";
+	}
 	
 	
 	@Override
@@ -63,7 +79,8 @@ public class MainMenuScreen implements Screen{
 			
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				// TODO
+				dispose();
+				game.setScreen(new GameScreen(game));
 			}
 		});
 		buttonPlay.pad(20); 											// nb of pixel of... je sais pas
@@ -113,6 +130,7 @@ public class MainMenuScreen implements Screen{
 			
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
+				dispose();
 				Gdx.app.exit();
 			}
 		});
@@ -173,7 +191,7 @@ public class MainMenuScreen implements Screen{
 
 	@Override
 	public void dispose() {
-
+		stage.dispose();
 		
 	}
 

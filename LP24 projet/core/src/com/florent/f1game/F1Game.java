@@ -2,6 +2,7 @@ package com.florent.f1game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.florent.f1game.screen.GameScreen;
 import com.florent.f1game.screen.MainMenuScreen;
 
 
@@ -20,7 +21,9 @@ public class F1Game extends Game {
 	public void create () {
 		
 		batch = new SpriteBatch();
-		this.setScreen(new MainMenuScreen());
+		this.setScreen(new MainMenuScreen(this));
+		//this.setScreen(new GameScreen(this));
+
 	}
 	
 	@Override

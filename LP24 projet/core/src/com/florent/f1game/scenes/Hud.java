@@ -9,9 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.florent.f1game.F1Game;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class Hud{
+public class Hud implements Disposable{
 	public Stage stage;
 	private Viewport viewport;
 	
@@ -56,4 +57,10 @@ public class Hud{
 
 	
 	}
+	
+	
+	@Override
+    public void dispose() { stage.dispose(); }
+
+    
 }
